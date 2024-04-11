@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %} {% block title %}Home{% endblock %} {% block body
+%}
+<div class="row">
+  <div class="col">
+    <h1>About me</h1>
+    <figure class="figure float-md-end mx-md-3 my-3">
+      <img
+        src="{{ asset('img/me.jpg') }}"
+        class="img-fluid max-img-size rounded"
+        alt="Martin"
+      />
+      <figcaption class="figure-caption d-flex justify-content-end">
+        Martin Nalepa
+      </figcaption>
+    </figure>
+    <p>Welcome to Martins MVC course page!</p>
+    <p>
+      I'm a first year student at the web programming programme at BTH,
+      currently studying MVC. Before studying at BTH I worked for a couple of
+      years in education administration and way too long as a bartender. My
+      formal education is rather limited, consisting of a few years of studying
+      medicine. Despite spending lots of time by the computer, I've never delved
+      into programming before. It's an exciting, albeit challenging, field to
+      try to venture into!
+    </p>
+    <p>
+      I'm curious by nature and love learning new things. I firmly beleive there
+      are no truly dull subjects; it's just a question of diving deep enough
+      into them! With that said there is nothing I enjoy more than listening to
+      enthusiasts ranting about their favorite topics. Most of my sparetime is
+      spent just talking to people and while I do enjoy a good boardgame or
+      consert, nothing beats engageing in interesting conversation. Preferably
+      sitting outdoors with a cold beer in hand.
+    </p>
+  </div>
+</div>
+{% endblock %}
