@@ -45,7 +45,7 @@ class ApiController extends AbstractController
         ];
         $quote = $quotes[array_rand($quotes)];
         $date = new \DateTime();
-        
+
         return new JsonResponse([
             'quote' => $quote,
             'date' => $date->format('Y-m-d'),

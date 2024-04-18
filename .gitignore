@@ -23,3 +23,10 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+###> ignore all files in tools belonging to vendors ###
+### Added this before installing code style helpers###
+/tools/**/vendor/
+/tools/**/composer.lock
+.php-cs-fixer.cache
+###< symfony codestyle tools ###
