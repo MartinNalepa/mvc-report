@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title %}Report{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-7">
+            <h1>OH NO!</h1>
+            <h3>Twiggy the Model has lost Control again!</h3>
+            <h3>She painted all over column {{ number }}!</h3>
+            <h3>The View is ruined!</h3>
+            <h3>What an (ab)User!</h3>
+        </div>
+        <div class="col-5">
+            <img class="img-fluid" src="{{ asset('img/twiggy.webp') }}" alt="Twiggy">    
+        </div>        
+        </div>
+    <div class="row">
+        {% for col in 1..12 %}
+            <div class="col-1">
+                <img class="img-fluid" src="{% if col == number %}{{ asset('img/raf_col.webp') }}{% else %}{{ asset('img/clean_col.webp') }}{% endif %}" alt="Greek column">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

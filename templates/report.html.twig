@@ -1,53 +1,87 @@
 {% extends "base.html.twig" %}
 {% block title %}Report{% endblock %}
 {% block body %}
-    <h2 id="kmom01">KMOM01</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
+    <div class="row">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6">
+            <h1 class="mb-2">Course Reports</h1>
+            <p>
+                Below you'll find my course reports for the MVC course. Click a button to jump to a report.
+            </p>
+            <div class="row">
+                <div class="col-12">
+                    <div class="btn-group" role="group">
+                        <div class="me-1">
+                            <a href="#kmom01" class="btn btn-sm btn-outline-dark">KMOM01</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom02" class="btn btn-sm btn-outline-dark">KMOM02</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom03" class="btn btn-sm btn-outline-dark">KMOM03</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom04" class="btn btn-sm btn-outline-dark">KMOM04</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom05" class="btn btn-sm btn-outline-dark">KMOM05</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom06" class="btn btn-sm btn-outline-dark">KMOM06</a>
+                        </div>
+                        <div class="me-1">
+                            <a href="#kmom10" class="btn btn-sm btn-outline-dark">KMOM10</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-5" id="kmom01">KMOM01</h3>
+            <p>I kursen ”Algoritmer och datastrukturer med objektorienterad Python” mötte jag objektorientering för första gången. Kursen gick igenom grunderna för OOP och jag känner mig hyfsat bekväm med tankesättet. Med det sagt är tankesättet relativt nytt för mig och det är många designmönster jag ännu inte lärt mig. </p>
+            <p>För att hålla svaret kort väljer jag att fokusera på PHP:s implementation av OOP jämfört med Pythons och går inte in på grunderna i objektorientering. I PHP skapar man en klasskonstruktor genom att definiera en konstruktormetod (_construct()). Till skillnad från Python måste man vid deklarerandet av både attribut och metoder även definiera klassens synlighet (”public”, ”private”, ”protected”). Vidare stödjer PHP endast arv från en klass, jämfört med Python som tillåter nedärvning från flera olika klasser. </p>
+            <p>När man väl bekantat sig med strukturen kändes den väldigt vettig. Att separera utvecklings och produktionsmiljö snabbar upp utvecklingen, utan att tumma på prestandan i produktion. Även om man på den här enkla sida inte drar de stora fördelarna av att dra täta skott mellan applikations olika ansvarsområden är det lätt att förstå hur mycket det underlättar i större projekt. Designtänket att bryta ner allting i små beståndsdelar tilltalar mig verkligen!</p>
+            <p>Jag kände att det var många delar av artikeln som jag inte var redo att ta till mig och skummade stora delar av den. Den var välskriven och verkade vettig, så kommer definitivt återkomma till den. De bitar som kändes enklast att till sig redan nu och som jag på kort sikt kommer titta närmare var avsnitten om kodpraxis och templates. När jag kommit längre in i kursen vill jag titta närmre på säkerhet, testning och cacheing.</p>
+            <p>Största TIL var att få en utökad förståelse för hur man kan strukturera sin kodbas. Bara att se och förstå mappstrukturen i ett symfony-projekt med encore vs AssetMapper och hur saker är länkade var mycket lärorikt. Här finns mycket kvar att lära. En sak jag dividerade mycket och inte riktigt blev klok på var avvägningen hur mycket som ska hårdkodas i templates, jämfört med hur mycket man serverar via routes/modeller. Jag var lockad att hålla templaterna i princip helt tomma på innehåll och bara låta dem stå för html-strukturen, men valde i slutändan ändå att hårdkoda in en hel del innehåll. Känns lockande att försöka skriva generella mallar, som man sen fyller med innehåll från controller/modell. Samtidigt har jag flera gånger gjort misstaget att initialt anstränga mig för att skriva väldigt DRY kod, för att i ett senare skede inse att modellen inte håller eller åtminstone blir väldigt omständlig att hålla generell.</p>
 
-    <h2 id="kmom02">KMOM02</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
+            <h3 id="kmom02">KMOM02</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
 
-    <h2 id="kmom03">KMOM03</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
+            <h3 id="kmom03">KMOM03</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
 
-    <h2 id="kmom04">KMOM04</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
+            <h3 id="kmom04">KMOM04</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
 
-    <h2 id="kmom05">KMOM05</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
-    
-    <h2 id="kmom06">KMOM06</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
+            <h3 id="kmom05">KMOM05</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            
+            <h3 id="kmom06">KMOM06</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
 
-    <h2 id="kmom10">KMOM10</h2>
-    <p>Lorem</p>
-    <p>ipsum</p>
-    <p>bla</p>
-    <p></p>
-    <p></p>
-    
+            <h3 id="kmom10">KMOM10</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>        
+    </div>
 {% endblock %}

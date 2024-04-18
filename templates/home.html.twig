@@ -1,26 +1,16 @@
 {% extends "base.html.twig" %} {% block title %}Home{% endblock %} {% block body
 %}
 <div class="row">
-  <div class="col">
+  <div class="col-12 col-sm-10 col-md-8 col-xl-6">
     <h1>About me</h1>
-    <figure class="figure float-md-end mx-md-3 my-3">
-      <img
-        src="{{ asset('img/me.jpg') }}"
-        class="img-fluid max-img-size rounded"
-        alt="Martin"
-      />
-      <figcaption class="figure-caption d-flex justify-content-end">
-        Martin Nalepa
-      </figcaption>
-    </figure>
     <p>Welcome to Martins MVC course page!</p>
     <p>
       I'm a first year student at the web programming programme at BTH,
-      currently studying MVC. Before studying at BTH I worked for a couple of
+      currently studying MVC. Before studying at BTH I worked a couple of
       years in education administration and way too long as a bartender. My
       formal education is rather limited, consisting of a few years of studying
-      medicine. Despite spending lots of time by the computer, I've never delved
-      into programming before. It's an exciting, albeit challenging, field to
+      medicine. Despite spending lots of time by the computer, I've never explored
+      programming before. It's an exciting, albeit challenging, field to
       try to venture into!
     </p>
     <p>
@@ -33,5 +23,23 @@
       sitting outdoors with a cold beer in hand.
     </p>
   </div>
+  <div class="col-12 col-md-4 mt-md-4 offset-xl-2 mt-lg-0">
+    <div class="card border-dark mb-3">
+      <img class="card-img-top" src="{{ asset('img/me.jpg') }}" alt="Martin Nalepa">
+      <div class="card-header">Martin Nalepa</div>
+      <div class="card-body text-dark">
+        <h5 class="card-title">Contact</h5>
+        <p class="card-text">
+          Reach me at:</br> 
+          <a href="mailto:fake@mail.com" class="btn btn-sm btn-outline-dark mt-2">fake@mail.com</a>
+        </p>
+        <h5 class="card-title">GitHub</h5>
+        <p class="card-text">
+          Checkout my GitHub:</br>
+          <a href="https://github.com/MartinNalepa/" class="btn btn-sm btn-outline-dark mt-2">My GitHub</a>
+        </p>
+      </div>
+    </div>
+</div>  
 </div>
 {% endblock %}
