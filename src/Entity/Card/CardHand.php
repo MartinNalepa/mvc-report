@@ -2,8 +2,6 @@
 
 namespace App\Entity\Card;
 
-use App\Entity\Card\Card;
-
 class CardHand {
     private $cards = [];
 

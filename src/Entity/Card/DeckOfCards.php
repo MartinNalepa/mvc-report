@@ -2,7 +2,6 @@
 
 namespace App\Entity\Card;
 
-use App\Entity\Card\Card;
 use App\Entity\Card\Exceptions\EmptyDeckException;
 
 abstract class DeckOfCards
@@ -21,7 +20,8 @@ abstract class DeckOfCards
         $this->cards[] = $card;
     }
 
-    public function drawCard(): Card {
+    public function drawCard(): Card
+    {
         if ($this->isEmpty()) {
             throw new EmptyDeckException();
         }
@@ -41,6 +41,15 @@ abstract class DeckOfCards
     public function isEmpty(): bool
     {
         return empty($this->cards);
+    }
+
+    public function getAsStringArray(): array
+    {
+        $cardStrings = [];
+        foreach ($this->cards as $card) {
+            $cardStrings[] = $card->getAsString();
+        }
+        return $cardStrings;
     }
 
     public function resetDeck(): void

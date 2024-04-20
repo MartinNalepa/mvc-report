@@ -2,9 +2,6 @@
 
 namespace App\Entity\Card;
 
-use App\Entity\Card\Card;
-use App\Entity\Card\DeckOfCards;
-
 class FrenchDeckNoJoker extends DeckOfCards
 {
     public function __construct()
