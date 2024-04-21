@@ -40,6 +40,14 @@ class Player {
     public function getHand() {
         return $this->hand->getCards();
     }
+    
+    public function __toArray() {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'hand' => $this->hand->__toArray()
+        ];
+    }
 
     public function clearHand() {
         $this->hand = new CardHand();

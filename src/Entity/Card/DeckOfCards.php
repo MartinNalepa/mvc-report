@@ -10,9 +10,22 @@ abstract class DeckOfCards
 
     abstract protected function createDeck(): void;
 
-    public function getDeck(): array
+    public function getCards(): array
     {
         return $this->cards;
+    }
+
+    public function getCopySortedCards(): array {
+        $sortedCards = $this->cards;
+
+        usort($sortedCards, function($a, $b) {
+            if ($a->getSuit() === $b->getSuit()) {
+                return $a->getValue() <=> $b->getValue();
+            }
+            return $a->getSuit() <=> $b->getSuit();
+        });
+
+        return $sortedCards;
     }
 
     public function addCard(Card $card): void
@@ -43,18 +56,28 @@ abstract class DeckOfCards
         return empty($this->cards);
     }
 
-    public function getAsStringArray(): array
-    {
-        $cardStrings = [];
-        foreach ($this->cards as $card) {
-            $cardStrings[] = $card->getAsString();
-        }
-        return $cardStrings;
-    }
 
     public function resetDeck(): void
     {
         $this->cards = [];
         $this->createDeck();
+    }
+        
+    /** Methods below are might not be used. Decided to work with objects throughout the game,
+     * and instead convert to string/array in the presentation layer.
+     */
+    public function __toArray() {
+        return [
+            'cards' => $this->getAsArray()
+        ];
+    }
+
+    public function getAsArray(): array
+    {
+        $cardArray = [];
+        foreach ($this->cards as $card) {
+            $cardArray[] = $card->getCard();
+        }
+        return $cardArray;
     }
 }

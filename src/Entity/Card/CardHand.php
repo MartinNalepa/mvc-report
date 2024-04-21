@@ -23,4 +23,12 @@ class CardHand {
     public function getCards(): array {
         return $this->cards;
     }
+
+    public function __toArray() {
+        return [
+            'cards' => array_map(function($card) {
+                return $card->__toString();
+            }, $this->cards)
+        ];
+    }
 }

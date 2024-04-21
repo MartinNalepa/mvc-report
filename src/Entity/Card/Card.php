@@ -10,7 +10,7 @@ class Card
     protected $suit;
     /* 11-15 represents: J, Q, K, A, Joker */
     protected static $validValues = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    protected static $validSuits = ['♠', '♣', '♥', '♦', 'Joker'];
+    protected static $validSuits = ['Spade', 'Club', 'Heart', 'Diamond', 'Joker'];
 
     public function __construct(int $value, string $suit)
     {
@@ -32,11 +32,13 @@ class Card
         return $this->suit;
     }
 
+    /** Methods below are might not be used. Decided to work with objects throughout the game,
+     * and instead convert to string/array in the presentation layer.
+     */
     public function getCard(): array
     {
         return [$this->value, $this->suit];
     }
-
 
     public function getAsString(): string
     {
@@ -46,6 +48,14 @@ class Card
             13 => 'K',
             14 => 'A',
             default => (string)$this->value
+        };
+        $suit = match($this->suit) {
+            'Spade' => '♠',
+            'Club' => '♣',
+            'Heart' => '♥',
+            'Diamond' => '♦',
+            'Joker' => 'Joker',
+            default => ''
         };
         return "[$value {$this->suit}]";
     }

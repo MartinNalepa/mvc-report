@@ -11,11 +11,15 @@ abstract class Game {
         $this->deck = new FrenchDeckNoJoker();
     }
 
-    protected function setDeck(DeckOfCards $deck): void{
+    public function setDeck(DeckOfCards $deck): void{
         $this->deck = $deck;
     }
 
-    protected function deal(Player $player, $numCards): void {
+    public function getDeck(): DeckOfCards {
+        return $this->deck;
+    }
+
+    public function deal(Player $player, $numCards): void {
         for ($i = 0; $i < $numCards; $i++) {
             $player->addCardToHand($this->deck->drawCard());
         }
@@ -23,6 +27,15 @@ abstract class Game {
 
     public function addPlayer(Player $player): void{
         $this->players[] = $player;
+    }
+
+    public function __toArray() {
+        return [
+            'deck' => $this->deck->__toArray(),
+            'players' => array_map(function($player) {
+                return $player->__toArray();
+            }, $this->players)
+        ];
     }
 
     abstract public function initializeGame();
