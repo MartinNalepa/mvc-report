@@ -20,13 +20,3 @@ body {
 .max-img-size {
     max-width: 300px;
 }
-
-.card-deck {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.play-card {
-    font-size: 5rem;
-    display: inline-flex;
-}

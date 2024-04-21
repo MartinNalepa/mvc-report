@@ -9,7 +9,7 @@ class CardHandTest extends TestCase
     public function testAddCard()
     {
         $hand = new CardHand();
-        $card = new Card(12, '♦');
+        $card = new Card(12, 'Diamond');
         $hand->addCard($card);
         $this->assertSame([$card], $hand->getCards());
     }
@@ -17,7 +17,7 @@ class CardHandTest extends TestCase
     public function testTakeCard()
     {
         $hand = new CardHand();
-        $card = new Card(2, '♠');
+        $card = new Card(2, 'Spade');
         $hand->addCard($card);
         $takenCard = $hand->takeCard($card);
         $this->assertSame($card, $takenCard);
@@ -27,7 +27,7 @@ class CardHandTest extends TestCase
     public function testTakeCardNotInHand()
     {
         $hand = new CardHand();
-        $card = new Card(14, '♣');
+        $card = new Card(14, 'Heart');
         $takenCard = $hand->takeCard($card);
         $this->assertNull($takenCard);
     }

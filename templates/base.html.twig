@@ -10,9 +10,11 @@
         <link rel="icon" href="{{ asset('img/favicon.ico') }}">
     </head>
     <body class="d-flex flex-column min-vh-100">
-        {% block header %}
-            {% include 'partials/header.html.twig' %}
-        {% endblock %}
+        <header class="sticky-top">
+            {% block nav %}
+                {% include 'partials/nav.html.twig' %}
+            {% endblock %}
+        </header>
         <main class="flex-grow-1 mt-5">
             <div class="container">
                 {% block body %}{% endblock %}

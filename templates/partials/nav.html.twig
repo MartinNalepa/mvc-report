@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img src="{{ asset('img/favicon.ico') }}" alt="Logo" style="height: 30px; margin-right: 10px;">
+            Glassworks
+        </a>
+        <!-- Mobile nav-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('about')}}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('report')}}">Report</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('card_index') }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Card
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ path('card_index')}}">Card</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_session')}}">Session</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_session_delete')}}">Delete Session</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_session_test')}}">Test Session</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_deck')}}">Deck</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_deck_shuffle')}}">Shuffle</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_deck_draw')}}">Draw</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('lucky')}}">Lucky</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
