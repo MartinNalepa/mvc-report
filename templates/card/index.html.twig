@@ -1,39 +1,75 @@
 {% extends "base.html.twig" %}
 {% block title %}About MVC{% endblock %}
 {% block body %}
-    <div class="row">
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6">
-            <h1>About the MVC course</h1>
-            <p>
-                The course focuses on learning about the design pattern MVC, where an application is separated into three components: Model, View, and Controller.
-                This separation of concerns is supposed to make the application easier to maintain and scale. In the pattern the model is responisble for data and business logic, 
-                the view for displaying data to the user and the controller for handling user input and updating the model and view.
-            </p>
-            <p>
-                Throughout the course we will be working with different frameworks to implement the MVC.
-                We'll use Symfony along with PHP to create a web application, and MySQL/SQLite/MariaDB for the database.
-                While solving assignments we'll be challenged to think object oriented and algorithmically.
-            </p>
-            <p>
-                The end goal is to create a secure, maintainable web application, while focusing on writing clean code. 
-            </p>
-        </div>
-        <div class="col-12 col-md-4 mt-md-4 offset-xl-2 mt-lg-0">
-            <div class="card border-dark mb-3">
-              <img class="card-img-top" src="{{ asset('img/mvc.webp') }}" alt="Github Logo">
-              <div class="card-body text-dark">
-                <h5 class="card-title">Course Repository</h5>
-                <p class="card-text">
-                  Explore the course materials on GitHub:</br> 
-                  <a href="https://github.com/dbwebb-se/mvc/" class="btn btn-sm btn-outline-dark mt-2">Visit Course Repo</a>
-                </p>
-                <h5 class="card-title">My Repository</h5>
-                <p class="card-text">
-                  Checkout my personal course repo:</br>
-                  <a href="https://github.com/MartinNalepa/mvc-report" class="btn btn-sm btn-outline-dark mt-2">Visit My Repo</a>
-                </p>
-              </div>
-            </div>
-        </div>          
+<div class="row">
+    <div class="col-12">
+        <h1>About the Card pages</h1>
+        <p>Welcome to my card game pages!</p>
+        <p>These pages were made as an exercise in OOP design. In the exercise we create a basic card game, where we
+            manage properties and game logic via PHP classes. Instances of the classes are stored as session data. At
+            the moment I've only implemented a skeleton of the game and have yet to implement game logic.</p>
+        <p>The functionality of the application can be accessed via the following routes:</p>
+        <ul>
+            <li><a href="{{ path('card_session') }}">/card/session</a> - Displays raw session data for debugging.</li>
+            <li><a href="{{ path('card_session_delete') }}">/card/session/delete</a> - Deletes all session data, useful
+                for resetting the session state during development.</li>
+            <li><a href="{{ path('card_session_test') }}">/card/session/test</a> - Tests the session by initializing a
+                game object and saving it to the session.</li>
+            <li><a href="{{ path('card_deck') }}">/card/deck</a> - Shows all cards in the deck, sorted by suit and
+                value.</li>
+            <li><a href="{{ path('card_deck_shuffle') }}">/card/deck/shuffle</a> - Shuffles the deck and displays the
+                shuffled cards.</li>
+            <li><a href="{{ path('card_deck_draw') }}">/card/deck/draw</a> - Draws a single card from the deck and shows
+                it. Redirects to draw a specific number of cards.</li>
+            <li><a href="{{ path('card_deck_draw_number', {'number': 4}) }}">/card/deck/draw/{'number'}</a> - Draws a
+                number of cards based on number in the URL (link set to 4)</li>
+            <li><a href="{{ path('card_deck_deal', {'players': 4, 'cards': 3}) }}">/card/deck/deal/{players}/{cards}</a>
+                - Deals cards to players. Number of cards and players based on the URL (link set to 4 players and 3
+                cards).</li>
+        </ul>
     </div>
-{% endblock %}
+    <div class="row">
+        <h3>Classes</h3>
+        <div class="col-12 col-sm-10 col-md-6">
+            <p>The class diagramme to the right shows the classes created for this exercise. Note that the Game and
+                DeckOfCards are actually abstract classes and as such have no direct compositional relationship to the
+                other classes, even though the diagramme shows a relationship. I thought it clearer to display it this
+                way than to show the relationship to the concrete classes that inherit from them.</p>
+            <h6>Game</h6>
+            <p>The Game class is an abstract class from which all the different games are to inherit from. I debated
+                whether I should simply have one single concrete Game class and support the different games via configs,
+                logic and game rule classes. In the end I chose to create an abstract class and to have each game type
+                have their own concrete class. Even with separate game classes I will probably still use separate rules
+                and logic classes. I reasoned that if the games differ a lot it would be best to separate the concerns.
+                The idea is to have similar games (i.e. Texas Hold'em, five stud Poker) be represented by a single Game
+                subclass, while a wildly different game (i.e. Whist) would merit a separate class. Similar games with
+                different rules would then be handled via rule classes.</p>
+            <p>The subclasses of the Game class contains the deck and the players. To make interaction with the
+                contained classes easier it also contains some methods to extend the contained classes methods.</p>
+            <h6>BasicGame</h6>
+            <p>A simple, concrete, class of the Game class type. Made just for demonstration purposes for this exercise
+            </p>
+            <h6>DeckOfCards</h6>
+            <p>Similarly to how the Game class is implemented DeckOfCards is an abstract class, from which all deck
+                classes inherit. The concrete subclasses of DeckOfCards contains Card objects. Further it provides
+                methods to interact with the deck.</p>
+            <h6>FrenchDeckNoJoker</h6>
+            <p>A concrete class of the DeckOfCards type. This class is a standard 52 card French deck without Jokers.
+            </p>
+            <h6>Player</h6>
+            <p>The Player class represents a player and their hand of cards. It provides methods to get player info and
+                to interact with the cards contained in the hand.</p>
+            <h6>CardHand</h6>
+            <p>The CardHand class represents a hand of cards. It contains the cards and provides methods to interact
+                with the cards.</p>
+            <h6>Card</h6>
+            <p>The Card class represents a single card. It contains the suit and value of the card and provides methods
+                to get the card info.</p>
+            <h6>CardGraphic</h6>
+            <p>Helper class to convert Card objects to unicode card symbols for presentation.</p>
+        </div>
+        <div class="col-12 col-md-6 mt-md-3 mt-lg-0">
+            <img class="img-fluid" src="{{ asset('img/card_class_uml.svg') }}" alt="class diagramme">
+        </div>
+    </div>
+    {% endblock %}
