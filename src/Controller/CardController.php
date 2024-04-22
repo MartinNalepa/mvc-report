@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Card\BasicGame;
 use App\Entity\Card\CardGraphic;
+use App\Entity\Card\Exceptions\EmptyDeckException;
 
 class CardController extends AbstractController
 {
@@ -66,7 +65,8 @@ class CardController extends AbstractController
         $deckGraphic = $cardGraphic->getGraphicForCollection($sortedCards);
 
         $data = [
-            'deck' => $deckGraphic
+            'deck' => $deckGraphic,
+            'pageTitle' => 'Sorted Deck'
         ];
           
         return $this->render('card/deck.html.twig', $data);
@@ -81,38 +81,96 @@ class CardController extends AbstractController
         $deck = $game->getDeck();
         $deck->shuffleDeck();
     
-        $session->set('game', $game);
-    
         $cardGraphic = new CardGraphic();
         $cards = $deck->getCards();
         $deckGraphic = $cardGraphic->getGraphicForCollection($cards);
-    
+
+
         $data = [
-            'deck' => $deckGraphic
+            'deck' => $deckGraphic,
+            'pageTitle' => 'Shuffled Deck'
         ];
     
+        $session->set('game', $game);    
+        return $this->render('card/deck.html.twig', $data);
+    }  
+
+    #[Route("/card/deck/draw", name: "card_deck_draw")]
+    public function deckDraw(SessionInterface $session): Response {
+
+    return $this->redirectToRoute('card_deck_draw_number', ['number' => 1]);
+    }
+
+    #[Route("/card/deck/draw/{number<\d+>}", name: "card_deck_draw_number")]
+    public function deckDrawNumber(SessionInterface $session, int $number): Response {
+        if (!$session->has('game')) {
+            $game = new BasicGame();
+            $session->set('game', $game);
+        } else {
+            $game = $session->get('game');
+        }
+
+        $drawnCards = $number;
+        $result = $game->drawCards($number);
+        
+    
+        if ($result['deckEmpty']) {
+            $drawnCards = count($result['cards']);
+            $this->addFlash('warning', 'The deck is empty and only ' . $drawnCards . ' cards were drawn.');
+        }
+    
+        $cardGraphic = new CardGraphic();
+        $deckGraphic = $cardGraphic->getGraphicForCollection($result['cards']);
+
+
+        $data = [
+            'deck' => $deckGraphic,
+            'pageTitle' => "Drew {$drawnCards} Cards"
+        ];
+        
+        $session->set('game', $game);
         return $this->render('card/deck.html.twig', $data);
     }
     
 
-    #[Route("/card/deck/draw", name: "card_deck_draw")]
-    public function deckDraw(SessionInterface $session): Response
-    {
-        $game = $session->get('game');
-        $game->drawCard();
+    #[Route("/card/deck/deal/{players<\d+>}/{cards<\d+>}", name: "card_deck_deal")]
+    public function deckDeal(SessionInterface $session, int $players, int $cards): Response {
+        if (!$session->has('game')) {
+            $game = new BasicGame();
+            $session->set('game', $game);
+        } else {
+            $game = $session->get('game');
+        }
     
-        return $this->redirectToRoute('card_session');
-    }
-
-    #[Route("/card/deck/draw/:number", name: "card_deck_draw_number")]
-    public function deckDrawNumber(SessionInterface $session, $number): Response
-    {
-        $game = $session->get('game');
-        $game->drawCard($number);
-    
-        return $this->redirectToRoute('card_session');
-    }
-
-    // #[Route("/card/deck/deal/:players/:cards", name: "card_deck_deal")]
+        $game->resetPlayers();
         
+        for ($i = 0; $i < $players; $i++) {
+            $game->addPlayer();
+        }
+        
+        $playerData = [];
+    
+        foreach ($game->getPlayers() as $player) {
+            try {
+                $game->deal($player, $cards);
+                $handGraphic = (new CardGraphic())->getGraphicForCollection($player->getHand());
+                $playerData[] = [
+                    'id' => $player->getId(),
+                    'name' => $player->getName(),
+                    'hand' => $handGraphic
+                ];
+            } catch (EmptyDeckException $e) {
+                $this->addFlash('warning', "The deck is empty! Stopped dealing at player {$player->getName()}.");
+                break;
+            }
+        }
+    
+        $data = [
+            'players' => $playerData,
+            'cardsInDeck' => $game->getDeck()->countCards(),
+            'pageTitle' => "Dealing {$cards} cards to {$players} Players"
+        ];
+
+        return $this->render('card/deck_deal.html.twig', $data);
+    }
 }

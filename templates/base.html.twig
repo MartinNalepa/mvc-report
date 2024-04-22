@@ -16,6 +16,9 @@
             {% endblock %}
         </header>
         <main class="flex-grow-1 mt-5">
+            {% block flash %}
+                {% include 'partials/flash.html.twig' %}
+            {% endblock %}
             <div class="container">
                 {% block body %}{% endblock %}
             </div>

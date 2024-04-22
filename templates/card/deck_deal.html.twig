@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block body %}
+<h1>{{ pageTitle }}</h1>
+<h5>Cards in deck: {{ cardsInDeck }}</h5>
+{% if players %}
+    {% for player in players %}
+        <div>
+            <h5>{{ player.name }} (ID: {{ player.id }})</h5>
+            <div class="card-deck">
+                {% for card in player.hand %}
+                    <div class="play-card">
+                        {{ card }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No players or card data available.</p>
+{% endif %}
+
+{% endblock %}

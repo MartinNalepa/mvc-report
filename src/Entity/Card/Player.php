@@ -8,7 +8,7 @@ class Player {
     private $hand;
     private $playerType;
 
-    public function __construct($id, $name = 'Player', $playerType = 'human') {
+    public function __construct(String $id, String $name, $playerType = 'human') {
         $this->id = $id;
         $this->name = $name;
         $this->playerType = $playerType;
@@ -40,7 +40,11 @@ class Player {
     public function getHand() {
         return $this->hand->getCards();
     }
-    
+
+    public function getPlayerType() {
+        return $this->playerType;
+    }
+
     public function __toArray() {
         return [
             'id' => $this->id,
