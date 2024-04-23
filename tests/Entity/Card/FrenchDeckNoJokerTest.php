@@ -15,7 +15,7 @@ class FrenchDeckNoJokerTest extends TestCase
     {
         $deck = new FrenchDeckNoJoker();
         $cards = $deck->getDeck();
-    
+
         $suits = ['♠', '♣', '♥', '♦'];
         $values = range(2, 14);
         foreach ($suits as $suit) {

@@ -7,8 +7,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for API requests as well as API documentation.
+ */
 class ApiController extends AbstractController
 {
+    /**
+     * Displays the API documentation.
+     *
+     * @return Response
+     */
     #[Route("/api/", name: "api_docs")]
     public function apiDocs(): Response
     {
@@ -34,7 +42,11 @@ class ApiController extends AbstractController
         ]);
     }
 
-
+    /**
+     * Returns a random quote from a list of quotes.
+     *
+     * @return JsonResponse
+     */
     #[Route("/api/quote", name: "quote")]
     public function quote(): JsonResponse
     {

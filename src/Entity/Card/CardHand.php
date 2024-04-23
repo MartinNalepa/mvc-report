@@ -2,14 +2,30 @@
 
 namespace App\Entity\Card;
 
-class CardHand {
+/**
+ * Represents a hand of playing cards.
+ */
+class CardHand
+{
     private $cards = [];
 
-    public function addCard(Card $card): void {
+    /**
+     * Adds a card to the hand.
+     * @param Card $card The card to add to the hand.
+     * @return void
+     */
+    public function addCard(Card $card): void
+    {
         $this->cards[] = $card;
     }
 
-    public function takeCard(Card $card): ?Card {
+    /**
+     * Take a card from the hand.
+     * @param Card $card Card to take from the hand.
+     * @return Card|null The card that was taken,or null if the card was not found.
+     */
+    public function takeCard(Card $card): ?Card
+    {
         $key = array_search($card, $this->cards, true);
         if ($key !== false) {
             $takenCard = $this->cards[$key];
@@ -20,13 +36,23 @@ class CardHand {
         return null;
     }
 
-    public function getCards(): array {
+    /**
+     * Returns the cards in the hand.
+     * @return array The cards in the hand.
+     */
+    public function getCards(): array
+    {
         return $this->cards;
     }
 
-    public function __toArray() {
+    /**
+     * Returns the number of cards in the hand.
+     * @return int The number of cards in the hand.
+     */
+    public function __toArray()
+    {
         return [
-            'cards' => array_map(function($card) {
+            'cards' => array_map(function ($card) {
                 return $card->__toString();
             }, $this->cards)
         ];

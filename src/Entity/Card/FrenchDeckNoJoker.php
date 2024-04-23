@@ -2,13 +2,22 @@
 
 namespace App\Entity\Card;
 
+/**
+ * Concrete subclass of DeckOfCards representing a French deck of cards without jokers.
+ */
 class FrenchDeckNoJoker extends DeckOfCards
 {
+    /**
+     * Creates a new French deck of cards without jokers.
+     */
     public function __construct()
     {
         $this->createDeck();
     }
 
+    /**
+     * Creates a new deck of French cards without jokers.
+     */
     protected function createDeck(): void
     {
         $suits = ['Spade', 'Club', 'Heart', 'Diamond'];
