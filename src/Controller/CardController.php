@@ -96,13 +96,13 @@ class CardController extends AbstractController
     }  
 
     #[Route("/card/deck/draw", name: "card_deck_draw")]
-    public function deckDraw(SessionInterface $session): Response {
+    public function deckDrawSingle(SessionInterface $session): Response {
 
     return $this->redirectToRoute('card_deck_draw_number', ['number' => 1]);
     }
 
     #[Route("/card/deck/draw/{number<\d+>}", name: "card_deck_draw_number")]
-    public function deckDrawNumber(SessionInterface $session, int $number): Response {
+    public function deckDrawMultiple(SessionInterface $session, int $number): Response {
         if (!$session->has('game')) {
             $game = new BasicGame();
             $session->set('game', $game);
@@ -157,6 +157,7 @@ class CardController extends AbstractController
                 $playerData[] = [
                     'id' => $player->getId(),
                     'name' => $player->getName(),
+                    'playerType' => $player->getPlayerType(),
                     'hand' => $handGraphic
                 ];
             } catch (EmptyDeckException $e) {
