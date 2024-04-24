@@ -35,7 +35,7 @@ class CardApiController extends AbstractController
             ]
         );
     }
-    
+
     /**
      * Shuffles deck from the session or creates a new deck and shuffles it.
      * The shuffled deck is then saved in the session and returned as a JSON object.
