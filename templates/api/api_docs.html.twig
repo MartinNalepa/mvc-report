@@ -3,39 +3,54 @@
 {% block body %}
 <div class="container my-4">
     <h1>API Documentation</h1>
-    <p>This document provides detailed information about each API jsonroute. Click the buttons below to navigate to the respective sections.</p>
+    <p>This document provides detailed information about each API route. Click the buttons below to navigate to the respective sections.</p>
     <div class="btn-group mb-4" role="group">
-        {% for jsonroute in jsonroutes %}
-            <a href="#{{ jsonroute.id }}" class="btn btn-primary">{{ jsonroute.title }}</a>
+        {% for route in jsonroutes %}
+        <a href="#{{ route.id }}" class="btn btn-light btn-outline-dark">{{ route.title }}</a>
         {% endfor %}
     </div>
-
-    {% for jsonroute in jsonroutes %}
+    {% for route in jsonroutes %}
     <div class="card mb-4">
         <div class="card-header">
-            <h2 id="{{ jsonroute.id }}">{{ jsonroute.title }}</h2>
+            <h2 id="{{ route.id }}">{{ route.title }}</h2>
         </div>
         <div class="card-body">
-            <p>{{ jsonroute.description }}</p>
+            <p>{{ route.description }}</p>
             <div class="row">
                 <div class="col-md-6">
-                    <h4>URL</h4>
-                    <pre>{{ jsonroute.url }}</pre>
-
-                    <h4>Method</h4>
-                    <pre>{{ jsonroute.method }}</pre>
+                    {% if route.url %}
+                        <h4>URL</h4>
+                        <pre>{{ route.url }}</pre>
+                    {% endif %}
+                    {% if route.method %}    
+                        <h4>Method</h4>
+                        <pre>{{ route.method }}</pre>
+                    {% endif %}
+                    {% if route.responseExamples %}
+                        <h4>Example responses:</h4>
+                        {% for response_key, response in route.responseExamples %}
+                        <div class="p-3 mb-2 bg-light text-dark border rounded">
+                            <h5>{{ response_key }}</h5>
+                            <pre class="mb-0">{{ response | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
-                    <h4>Arguments</h4>
-                    <p>{{ jsonroute.arguments }}</p>
-
-                    <h4>Request Example</h4>
-                    <pre>{{ jsonroute.requestExample }}</pre>
+                    {% if route.arguments %}
+                        <h4>Arguments</h4>
+                        <p>{{ route.arguments }}</p>
+                    {% endif %}
+                    {% if route.statusCodes %}
+                        <h4>Status Codes and Messages</h4>
+                        <p>Aside from default status reponse codes, the following are in use:</p>
+                        <ul>
+                            {% for code, message in route.statusCodes %}
+                            <li><strong>{{ code }}</strong>: {{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
-            </div>
-            <h4>Example response:</h4>
-            <div class="p-3 mb-2 bg-light text-dark border rounded">
-                <pre class="mb-0">{{ jsonroute.responseExample | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
             </div>
         </div>
     </div>
