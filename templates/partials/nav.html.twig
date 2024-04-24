@@ -32,6 +32,9 @@
                         <li><a class="dropdown-item" href="{{ path('card_deck')}}">Deck</a></li>
                         <li><a class="dropdown-item" href="{{ path('card_deck_shuffle')}}">Shuffle</a></li>
                         <li><a class="dropdown-item" href="{{ path('card_deck_draw')}}">Draw</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_deck_draw_number', {'number': 5}) }}">Draw 5 Cards</a></li>
+                        <li><a class="dropdown-item" href="{{ path('card_deck_deal', {'players': 4, 'cards': 5}) }}">Deal</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
