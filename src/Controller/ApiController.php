@@ -188,7 +188,8 @@ class ApiController extends AbstractController
             ]
         ];
         return $this->render(
-            'api/api_docs.html.twig', [
+            'api/api_docs.html.twig',
+            [
             'jsonroutes' => $jsonroutes
             ]
         );
