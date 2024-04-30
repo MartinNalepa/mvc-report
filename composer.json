@@ -1,4 +1,6 @@
 {
+    "name": "martinnalepa/glassworks",
+    "description": "Glassworks is a Symfony project created as course work for the MVC course at BTH",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -87,7 +89,13 @@
             "@auto-scripts"
         ],
         "csfix": "php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=tools/php-cs-fixer/.php-cs-fixer.dist.php src tests",
-        "csfix:dry": "php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=tools/php-cs-fixer/.php-cs-fixer.dist.php src tests --dry-run -v"
+        "csfix:dry": "php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=tools/php-cs-fixer/.php-cs-fixer.dist.php src tests --dry-run -v",
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon || true",
+        "lint": [
+            "@phpmd",
+            "@phpstan"
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
