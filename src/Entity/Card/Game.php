@@ -99,6 +99,15 @@ abstract class Game
         return $this->players;
     }
 
+    public function getHands(): array
+    {
+        $playerCards = [];
+        foreach ($this->players as $player) {
+            $playerCards[] = $player->getHand();
+        }
+        return $playerCards;
+    }
+
     /**
      * Removes all players from the game.
      */
@@ -111,7 +120,7 @@ abstract class Game
      * Returns the game as serializable array.
      * @return array An array with the deck and players in the game.
      */
-    public function __toArray()
+    public function __toArray(): array
     {
         return [
             'deck' => $this->deck->__toArray(),
@@ -124,7 +133,7 @@ abstract class Game
     /**
      * Initializes the game.
      */
-    abstract public function initializeGame();
-    // abstract public function playTurn(Player $player);
-    // abstract public function endGame();
+    abstract public function initializeGame(): void;
+
+    abstract public function getHandValues(): array;
 }
