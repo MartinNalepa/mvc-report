@@ -1,0 +1,132 @@
+{% extends "base.html.twig" %}
+{% block title %}About MVC{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-10">
+        <h1>Twenty-One Documentation</h1>
+        <p>This page contains documentation for my implementation of a Twenty-One style card game. The documentation
+            includes my initial sketches from the planning phase, as well as a short description of the applications
+            classes.</p>
+    </div>
+</div>
+<div class="row">
+    <h3>Planning game logic</h3>
+    <div class="row">
+        <div class="col-10">
+            <p>While drafting an initial design for the game I sketched out the fundamental game logic in pseudo code and
+                with a flow chart. In this phase I wanted to focus on breaking down the core game logic. As I deemed it too
+                intricate I decided to leave out class and method definition.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h5>Pseudo code</h5>
+            <div class="p-3 mb-2 bg-light text-dark border rounded">
+                <pre><code>
+START
+
+INITIALIZE game_objects: GameState, Game, Player, Deck, Hand, Card, CardGraphic
+SET GameState = "new_game"
+SET Players = ["Player", "Dealer"]
+SET Deck = [52 cards]
+SET Player.CardHand = []
+SET Dealer.CardHand = []
+
+CALL shuffle(deck)
+CALL dealCard(player)
+
+IF player_hand_value > 21 THEN
+    SET game_state = "end_game"
+    GOTO evaluate_scores
+ENDIF
+
+SET game_state = "player_turn"
+GET player_choice_draw_or_hold
+
+WHILE player_choice == "Draw"
+    CALL dealCard(player)
+    IF player_hand_value > 21 THEN
+        GOTO evaluate_scores
+    ELSE
+        GET player_choice
+    ENDIF
+ENDWHILE
+
+SET game_state = "dealer_turn"
+
+WHILE dealer_hand_value <= 17:
+    CALL dealCard(dealer)
+ENDWHILE
+
+evaluate_scores:
+IF player_hand_value > 21 THEN
+    CALL display_result("Player busted, Dealer wins")
+ELSE IF dealer_hand_value > 21 THEN
+    CALL display_result("Dealer busted, Player wins")
+ELSE IF player_hand_value > dealer_hand_value THEN
+    CALL display_result("Player wins")
+ELSE
+    CALL display_result("Dealer wins")
+ENDIF
+                </code></pre>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <img class="img-fluid" src="{{ asset('img/twentyone/flow_full_td.png') }}" alt="Flow Chart">
+        </div>
+    </div>
+    <div class="row">
+        <h3>Classes</h3>
+        <div class="col-12 col-md-6">
+            <p>The class diagramme to the right shows the classes created for the Twenty-One Card game. Note that the
+                GameState, Game and
+                DeckOfCards are actually abstract classes and as such have no direct compositional relationship to the
+                other classes, even though the diagramme shows a relationship. I thought it clearer to display it this
+                way than to show the relationship to the concrete classes that inherit from them.</p>
+            <h6>GameState</h6>
+            <p>The GameState class is an abstract class from which all the different game states are to inherit from.
+                The GameState contains the Game object and handles keeps track of the game state. Further, Game State
+                exposes public functions that lets the Controller interact with the game.</p>
+            <h6>TwentyOneGameState</h6>
+            <p>Concrete subclass of the GameState class specifically tailored for the Twenty-One game. Via the Execute
+                method the controller can interact with the game. The execute method moves forward depending on the
+                current game state.</p>
+            <h6>Game</h6>
+            <p>The Game class is an abstract class from which all the different games are to inherit from. I debated
+                whether I should simply have one single concrete Game class and support the different games via configs,
+                logic and game rule classes. In the end I chose to create an abstract class and to have each game type
+                have their own concrete class. Even with separate game classes I will probably still use separate rules
+                and logic classes. I reasoned that if the games differ a lot it would be best to separate the concerns.
+                The idea is to have similar games (i.e. Texas Hold'em, five stud Poker) be represented by a single Game
+                subclass, while a wildly different game (i.e. Whist) would merit a separate class. Similar games with
+                different rules would then be handled via rule classes.</p>
+            <p>The subclasses of the Game class contains the deck and the players. To make interaction with the
+                contained classes easier it also contains some methods to extend the contained classes methods.</p>
+            <h6>TwentyOneGame</h6>
+            <p>A simple, concrete, class of the Game class type. Made just for demonstration purposes for this exercise
+            </p>
+            <h6>DeckOfCards</h6>
+            <p>Similarly to how the Game class is implemented DeckOfCards is an abstract class, from which all deck
+                classes inherit. The concrete subclasses of DeckOfCards contains Card objects. Further it provides
+                methods to interact with the deck.</p>
+            <h6>FrenchDeckNoJoker</h6>
+            <p>A concrete class of the DeckOfCards type. This class is a standard 52 card French deck without Jokers.
+            </p>
+            <h6>Player</h6>
+            <p>The Player class represents a player and their hand of cards. It provides methods to get player info and
+                to interact with the cards contained in the hand.</p>
+            <h6>CardHand</h6>
+            <p>The CardHand class represents a hand of cards. It contains the cards and provides methods to interact
+                with the cards.</p>
+            <h6>Card</h6>
+            <p>The Card class represents a single card. It contains the suit and value of the card and provides methods
+                to get the card info.</p>
+            <h6>CardGraphic</h6>
+            <p>Helper class to convert Card objects to unicode card symbols for presentation.</p>
+        </div>
+        <div class="col-12 col-md-6">
+            <img class="img-fluid" src="{{ asset('img/twentyone/class_uml.png') }}" alt="Flow Chart">
+        </div>
+    </div>
+</div>
+{% endblock %}

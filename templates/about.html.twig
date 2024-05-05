@@ -1,39 +1,44 @@
 {% extends "base.html.twig" %}
 {% block title %}About MVC{% endblock %}
 {% block body %}
-    <div class="row">
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6">
-            <h1>About the MVC course</h1>
-            <p>
-                The course focuses on learning about the design pattern MVC, where an application is separated into three components: Model, View, and Controller.
-                This separation of concerns is supposed to make the application easier to maintain and scale. In the pattern the model is responisble for data and business logic, 
-                the view for displaying data to the user and the controller for handling user input and updating the model and view.
-            </p>
-            <p>
-                Throughout the course we will be working with different frameworks to implement the MVC.
-                We'll use Symfony along with PHP to create a web application, and MySQL/SQLite/MariaDB for the database.
-                While solving assignments we'll be challenged to think object oriented and algorithmically.
-            </p>
-            <p>
-                The end goal is to create a secure, maintainable web application, while focusing on writing clean code. 
-            </p>
-        </div>
-        <div class="col-12 col-md-4 mt-md-4 offset-xl-2 mt-lg-0">
-            <div class="card border-dark mb-3">
-              <img class="card-img-top" src="{{ asset('img/mvc.webp') }}" alt="Github Logo">
-              <div class="card-body text-dark">
+<div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-xl-6">
+        <h1>About the MVC course</h1>
+        <p>
+            The course focuses on learning about the design pattern MVC, where an application is separated into three
+            components: Model, View, and Controller.
+            This separation of concerns is supposed to make the application easier to maintain and scale. In the pattern
+            the model is responisble for data and business logic,
+            the view for displaying data to the user and the controller for handling user input and updating the model
+            and view.
+        </p>
+        <p>
+            Throughout the course we will be working with different frameworks to implement the MVC.
+            We'll use Symfony along with PHP to create a web application, and MySQL/SQLite/MariaDB for the database.
+            While solving assignments we'll be challenged to think object oriented and algorithmically.
+        </p>
+        <p>
+            The end goal is to create a secure, maintainable web application, while focusing on writing clean code.
+        </p>
+    </div>
+    <div class="col-12 col-md-4 mt-md-4 offset-xl-2 mt-lg-0">
+        <div class="card border-dark mb-3">
+            <img class="card-img-top" src="{{ asset('img/mvc.webp') }}" alt="Github Logo">
+            <div class="card-body text-dark">
                 <h5 class="card-title">Course Repository</h5>
                 <p class="card-text">
-                  Explore the course materials on GitHub:</br> 
-                  <a href="https://github.com/dbwebb-se/mvc/" class="btn btn-sm btn-outline-dark mt-2">Visit Course Repo</a>
+                    Explore the course materials on GitHub:</br>
+                    <a href="https://github.com/dbwebb-se/mvc/" class="btn btn-sm btn-outline-dark mt-2">Visit Course
+                        Repo</a>
                 </p>
                 <h5 class="card-title">My Repository</h5>
                 <p class="card-text">
-                  Checkout my personal course repo:</br>
-                  <a href="https://github.com/MartinNalepa/mvc-report" class="btn btn-sm btn-outline-dark mt-2">Visit My Repo</a>
+                    Checkout my personal course repo:</br>
+                    <a href="https://github.com/MartinNalepa/mvc-report" class="btn btn-sm btn-outline-dark mt-2">Visit
+                        My Repo</a>
                 </p>
-              </div>
             </div>
-        </div>          
+        </div>
     </div>
+</div>
 {% endblock %}

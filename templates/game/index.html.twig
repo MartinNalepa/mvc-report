@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block title %}Twenty One{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-8">
+        <h1>About twenty one</h1>
+        <p>These pages contain a simlpe version of a twenty-one card game. Twenty-one is similar to Black-jack, but with
+            slightly different rules. In this early version one player plays versus the dealer and no betting or score
+            tracking is implemented.</p>
+        
+        <h3>Rules</h3>
+        <ul>
+            <li>The goal of the game is to get a higher value hand than the dealer without passing 21 points.</li>
+            <li>The score of a hand is the sum of the card's ranks. </li>
+            <li>Jacks are counted as 11, Queens as 12, Kings as 13 and Aces as either 1 or 14 (player's choice).</li>
+            <li>The player is dealt one card at a time and can choose to stop being dealt cards after each card.</li>
+            <li>Once the player holds the dealer is dealt cards in the same fashion.</li>
+            <li>If at any point a hand's score passes 21 points the hand is considered busted and the opponent immediately wins the round.</li>
+            <li>Once the dealer holds the player with the highest value hand wins.</li>
+            <li>In case both hands have equal value the dealer wins.</li>
+        </ul>
+    </div>
+    <div class="col-3 offset-1">
+        <div class="card border-dark mb-3">
+            <div class="card-body text-dark">
+                <h5 class="card-title">Game links</h5>
+                <p class="card-text">
+                    <a href="{{ path('twentyone') }}" class="btn btn-sm btn-outline-dark mb-1">Play Twenty-One</a>
+                    <a href="{{ path('game_doc') }}" class="btn btn-sm btn-outline-dark mb-1">Game Documentation</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}

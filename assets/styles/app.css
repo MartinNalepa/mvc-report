@@ -29,4 +29,24 @@ body {
 .play-card {
     font-size: 5rem;
     display: inline-flex;
+    color: black;
+}
+
+.card-area {
+    border: 1px solid black;
+    min-height: 15vh;
+    width: 95%;
+    margin: 1% auto;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blackjack-table {
+    background-color: green;
+    color: white;
+    padding: 2%;
+    border-radius: 10px;
 }
