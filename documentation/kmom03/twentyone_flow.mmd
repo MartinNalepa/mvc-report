@@ -1,0 +1,17 @@
+graph TD
+    Start --> PlayerDealt[Player dealt one card]
+    PlayerDealt --> CheckPlayerBust{Player hand bust?}
+    CheckPlayerBust -->|Yes| EvaluateScore
+    CheckPlayerBust -->|No| PlayerChoice[/Player choice/]
+    PlayerChoice -->|Draw| PlayerDealt
+    PlayerChoice -->|Hold| DealerDealt[Dealer dealt one card]
+    DealerDealt --> DealerChoice{Score <= 17}
+    DealerChoice -->|Yes, Draw| DealerDealt
+    DealerChoice -->|No, Hold| EvaluateScore
+    EvaluateScore{Evaluate scores} -->|Player > 21| PlayerWins[Player wins]
+    EvaluateScore -->|Dealer > 21| DealerWins[Dealer wins]
+    EvaluateScore -->|Player > Dealer | PlayerWins[Player wins]
+    EvaluateScore -->|Player < Dealer| DealerWins[Dealer wins]
+    EvaluateScore -->|Player = Dealer| DealerWins
+    PlayerWins --> End
+    DealerWins --> End
