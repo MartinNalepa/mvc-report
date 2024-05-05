@@ -1,0 +1,45 @@
+START
+
+INITIALIZE game_objects: GameState, Game, Player, Deck, Hand, Card, CardGraphic
+SET GameState = "new_game"
+SET Players = ["Player", "Dealer"]
+SET Deck = [52 cards]
+SET Player.CardHand = []
+SET Dealer.CardHand = []
+
+CALL shuffle(deck)
+CALL dealCard(player)
+
+IF player_hand_value > 21 THEN
+    SET game_state = "end_game"
+    GOTO evaluate_scores
+ENDIF
+
+SET game_state = "player_turn"
+GET player_choice_draw_or_hold
+
+WHILE player_choice == "Draw"
+    CALL dealCard(player)
+    IF player_hand_value > 21 THEN
+        GOTO evaluate_scores
+    ELSE
+        GET player_choice
+    ENDIF
+ENDWHILE
+
+SET game_state = "dealer_turn"
+
+WHILE dealer_hand_value <= 17:
+    CALL dealCard(dealer)
+ENDWHILE
+
+evaluate_scores:
+IF player_hand_value > 21 THEN
+    CALL display_result("Player busted, Dealer wins")
+ELSE IF dealer_hand_value > 21 THEN
+    CALL display_result("Dealer busted, Player wins")
+ELSE IF player_hand_value > dealer_hand_value THEN
+    CALL display_result("Player wins")
+ELSE
+    CALL display_result("Dealer wins")
+ENDIF
